@@ -2,13 +2,32 @@
 
 # Cocos2d-x Deconstruction
 
-This analysis will cover the game loop, game object, graphics, and rendering of the Cocos2d-x engine version 3+. 'Cocos2d-x' and 'Cocos' will be used interchangeably to refer to the engine.
+Emma Bobola & Janna Shaftan
+
+Northeastern University, EECE4850 - Game Engines
+
+Professor: Nik Bear Brown
+
+Spring 2017
 
 ## Introduction
+
+This analysis will cover the game loop, game object, graphics, and rendering of the Cocos2d-x engine version 3+. 'Cocos2d-x' and 'Cocos' will be used interchangeably to refer to the engine.
+
+## Engine About:
 
 * release date
 * company
 * what the engine offers as compared to older versions
+* MIT License
+* Cross-Platform
+** MacOS X
+** Linux
+** Windows 8
+** iOS
+** Android
+** Tizen
+
 
 ### External Dependencies:
 
