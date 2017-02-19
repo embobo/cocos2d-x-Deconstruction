@@ -21,12 +21,12 @@ This analysis will cover the game loop, game object, graphics, and rendering of 
 * what the engine offers as compared to older versions
 * MIT License
 * Cross-Platform
-** MacOS X
-** Linux
-** Windows 8
-** iOS
-** Android
-** Tizen
+* * MacOS X
+* * Linux
+* * Windows 8
+* * iOS
+* * Android
+* * Tizen
 
 
 ### External Dependencies:
@@ -114,6 +114,10 @@ The key variables used in the game loop are:
 [insert important code here]
 
 ### Graphics and Rendering:
+
+The graphics and rendering run from the 'renderer' module
+
+
 
 ### Game Objects:
 
