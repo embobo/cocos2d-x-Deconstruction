@@ -104,7 +104,12 @@ void Director::mainLoop()
 }
 ```
 
-The key variables used in the game loop are:
+The Director class variables are set up in its `init()` function:
+
+
+
+
+The key variables used for the game loop by the Director class are:
 * `Scene *_runningScene`
 * `Scene *_nextScene`
 * `Renderer _renderer`
