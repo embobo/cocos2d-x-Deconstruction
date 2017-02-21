@@ -21,13 +21,13 @@ This analysis will cover the game loop, game object, graphics, and rendering of 
 * history
 * what the engine offers as compared to older versions
 * MIT License
-* Cross-Platform
-* * MacOS X
-* * Linux
-* * Windows 8
-* * iOS
-* * Android
-* * Tizen
+* Cross-Platform:
+> * MacOS X
+> * Linux
+> * Windows 8
+> * iOS
+> * Android
+> * Tizen
 
 
 ### External Dependencies:
@@ -112,7 +112,7 @@ The director is ultimately responsible for moving from one [scene](https://githu
 
 Games are appealing because elements of the game react and change. For example the user may control a karate master fighter player on screen. When the player lands a hit the opposing fighter might be updated to have a bloody nose.
 
-> 'User' is a word which here means someone who is operating the machine on which a game is running.
+> 'User' is a word which will be used to refer to someone who is operating the machine on which a game is running.
 > 
 > 'Player' is a word which will be used to refer to the in game character controlled by the user. 
 > 
@@ -124,14 +124,28 @@ At each iteration of the game loop, the states of various objects in the game ch
 
 After all changes to the scene are made, rendering can be used to translate the codified game objects into parameters the graphics can use to display the scene. Cocos performs these tasks at each iteration of the game loop when `drawScene()` is called.
 
-* Clear the renderer
-* Change current scene to the next scene
-* Update time dependent states in scene's objects (physics and navigation)
-* Clear draw stats on the renderer
-* Render in the graphics object
-* Swap buffers in the graphics object
+1. Clear the renderer
+2. Update current scene
+3. Update time dependent states in scene's objects (physics and navigation)
+4. Clear draw stats on the renderer
+5. Render in the graphics object
+6. Swap buffers in the graphics object
 
-[Clear the renderer:](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.cpp#L666)
+The core classes used by Cocos to accomplish this are:
+
+**[GLView](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCGLView.h#L100):**
+
+**GLView** is an abstract class that is inherited by the **GLViewImpl** class in each platform with behaviors specific to that platform. For example, the [ios implementation](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/ios/CCGLViewImpl-ios.h#L41) must check for and accommodate the high pixel density of a retina display.
+
+The **GLViewImpl** is set through preprocessor configuration directives.
+
+**[Renderer](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L140)**
+*  TODO: add more on renderer
+
+
+* **
+
+##### 1. [Clear the renderer:](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.cpp#L666)
 
 ```c++
 void Renderer::clear()
@@ -146,17 +160,19 @@ void Renderer::clear()
 }
 ```
 
+##### 2. Update current scene:
+
 [Set `_runningScene`](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/base/CCDirector.cpp#L1144) to the scene that needs to be rendered
 
-[Update object transforms](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.cpp#L358) (physics and navigation)
+##### 3. [Update object transforms](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.cpp#L358) (physics and navigation):
 
-[Clear the renderer's draw stats](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L194)
+##### 4. [Clear the renderer's draw stats](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L194):
 
 ```c++
 void clearDrawStats() { _drawnBatches = _drawnVertices = 0; }
 ```
 
-[Render scene in the graphics object](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCGLView.cpp#L486)
+##### 5. [Render scene in the graphics object](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCGLView.cpp#L486):
 
 ```c++
 void GLView::renderScene(Scene* scene, Renderer* renderer)
@@ -175,7 +191,7 @@ void GLView::renderScene(Scene* scene, Renderer* renderer)
 }
 ```
 
-Swap buffers (platform specific) - [ios method](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/ios/CCGLViewImpl-ios.mm#L210):
+##### 6. Swap buffers (platform specific) - [ios method](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/ios/CCGLViewImpl-ios.mm#L210):
 
 ```c++
 void GLViewImpl::swapBuffers()
@@ -185,23 +201,6 @@ void GLViewImpl::swapBuffers()
 }
 ```
 
-The **Director** class instantiates the objects used to perform scene updates:
-
-* Scene: `Scene* _runningScene`
-* Rendering: `Renderer _renderer`
-* Graphics: `GLView* _openGLView`
-
-**[GLView](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCGLView.h#L100)** is an abstract class. Each platform contains a class **GLViewImpl** which inherits from **GLView** and defines the required behavior for that platform. For example, the [ios implementation](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/ios/CCGLViewImpl-ios.h#L41) must check for and accommodate the high pixel density of a retina display.
-
-The GLView implementation is decided through a set of preprocessor directives.
-
-**[Renderer](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L140)**
-*  TODO: add more on renderer
-
-
-* **
-
-
-
 
 ## Game Objects:
+
