@@ -196,7 +196,7 @@ The **Director** class instantiates the objects used to perform scene updates:
 The GLView implementation is decided through a set of preprocessor directives.
 
 **[Renderer](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L140)**
-*  TODO
+*  TODO: add more on renderer
 
 
 * **
