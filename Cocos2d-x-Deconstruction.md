@@ -12,15 +12,21 @@ Spring 2017
 
 ## Introduction
 
-For the following analysis 'Cocos2d-x' and 'Cocos' will be used interchangeably to refer to the game engine. 
+This code deconstruction was written for the purpose of learning how game engines are architected. 'Cocos2d-x' and 'Cocos' will be used interchangeably to refer to the game engine. We will review the capabilities and overall architecture of the engine, followed by in depth analyses of several core components of the Cocos game engine.
 
-This analysis will cover:
+## Table of Contents
 
-1. [the game loop](#time-and-game-loop)
-2. [graphics and rendering](#graphics-and-rendering)
-3. [game objects](#game-objects)
+1. [About the Engine](#engine-about)
+2. [External Libraries](#external-dependencies)
+3. [Architecture](#architecture)
+4. [Engine Components](#game-engine-components)
 
-## Engine About:
+> * [Overview](#component-overview)
+> * [Time and the Game Loop](#time-and-game-loop)
+> * [Graphics and Rendering](#graphics-and-rendering)
+> * [Game Objects](#game-objects)
+
+## Engine About
 
 * release date
 * company
@@ -37,7 +43,7 @@ This analysis will cover:
 > * Tizen
 
 
-### External Dependencies:
+### External Dependencies
 
 * Physics ~~~ [Box2D](http://box2d.org/) and [Chipmunk](http://chipmunk-physics.net/)
 * Skeleton Animations ~~~ [Spine](http://esotericsoftware.com/) and [Armature](http://www.armaturestudio.com/)
@@ -58,12 +64,12 @@ The 'Cocos2d C++ Engine' (or 'Cocos2d-x') is the focus of this analysis. We have
 
 (create image)
 
-Game Engine Components
+### Game Engine Components
 =
 
 Because of the extensive code base, not all components will be covered in this analysis. Provided for reference are all of the names and links to where key components can be found in the git repository.
 
-#### Key Engine Components:
+#### Component Overview:
 
 |  |Module|Class or File|Ext. Dependencies|Analyzed|
 | ----|----|----|----|----- |
