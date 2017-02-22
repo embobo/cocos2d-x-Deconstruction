@@ -17,8 +17,8 @@ This code deconstruction was written for the purpose of learning how game engine
 ## Table of Contents
 
 1. [About the Engine](#about-the-engine)
-2. [External Libraries](#external-dependencies)
-3. [Architecture](#architecture)
+2. [External Dependencies/Libraries](#external-dependencies)
+3. [Architecture of Engine Framework](#framework-architecture)
 4. [Engine Components](#game-engine-components)
 
 > * [Overview](#component-overview)
@@ -52,23 +52,22 @@ This code deconstruction was written for the purpose of learning how game engine
 * Graphics ~~~ [OpenGL](https://www.opengl.org/)
 
 
-## Architecture
+## Framework Architecture
 
-The Cocos2d-x Games Architecture:
+The Cocos2d Games Architecture:
 
 <img src="https://raw.githubusercontent.com/cocos2d/cocos2d-x/v3/docs/framework_architecture.jpg" width = 600>
 
 
 [https://raw.githubusercontent.com/cocos2d/cocos2d-x/v3/docs/framework_architecture.jpg](https://raw.githubusercontent.com/cocos2d/cocos2d-x/v3/docs/framework_architecture.jpg)
 
-The 'Cocos2d C++ Engine' (or 'Cocos2d-x') is the focus of this analysis. We have created a sub-analysis of the C++ Engine's architecture:
+The 'Cocos2d C++ Engine' is the focus of this analysis. We have created a diagram of the C++ Engine sub-component's architecture:
 
 (create image)
 
 ## Game Engine Components
-=
 
-Because of the extensive code base, not all components will be covered in this analysis. Provided for reference are all of the names and links to where key components can be found in the git repository.
+Because of the extensive code base, not all components will be covered in this analysis. The Component Overview provides links to where all key components can be found in the Cocos git repository.
 
 ### Component Overview
 
@@ -123,6 +122,31 @@ void Director::mainLoop()
 The director is ultimately responsible for moving from one [scene](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.h) to the next.
 
 ### Game Objects
+=
+
+Game objects in Cocos are instances of the **Node** class or one of its inheritors. Game objects share several basic qualities given in the **Node** class.
+
+> The **Node** base class contains variables for:
+> 
+> * size
+> * position
+>
+> and methods for: 
+> 
+> * containing other nodes
+> * scheduling callbacks for time dependence
+> * executing actions
+
+Because of the scope of functionality **Node**'s inheritors encompass, this section will cover only the important aspects of each of the following especially common game objects:
+
+* [**Scene**](#scene-game-object)
+* [**Sprite**](#sprite-game-object)
+
+#### Scene Game Object
+
+The [**Scene**](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/2d/CCScene.h#L69) class is nearly identical to the **Node** ancestor with a few important differences. The **Scene** class is used in Cocos to, ideally, parent all other game objects living in the scene, as such it defaults its anchor to the center of the game world. Additionally, it contains a **Camera** object responsible for view perspective, as well as methods for rendering the Scene. 
+
+#### Sprite Game Object
 
 ### Physics
 
