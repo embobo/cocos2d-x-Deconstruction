@@ -12,7 +12,13 @@ Spring 2017
 
 ## Introduction
 
-This analysis will cover the game loop, game object, graphics, and rendering of the Cocos2d-x engine version 3+. 'Cocos2d-x' and 'Cocos' will be used interchangeably to refer to the game engine.
+For the following analysis 'Cocos2d-x' and 'Cocos' will be used interchangeably to refer to the game engine. 
+
+This analysis will cover:
+
+1. [the game loop](#time-and-game-loop)
+2. [graphics and rendering](#graphics-and-rendering)
+3. [game objects](#game-objects)
 
 ## Engine About:
 
@@ -124,7 +130,7 @@ At each iteration of the game loop, the states of various objects in the game ch
 
 After all changes to the scene are made, rendering can be used to translate the codified game objects into parameters the graphics can use to display the scene. Cocos performs these tasks at each iteration of the game loop when `drawScene()` is called.
 
-1. Clear the renderer
+1. [Clear the renderer](#clear-the-renderer)
 2. Update current scene
 3. Update time dependent states in scene's objects (physics and navigation)
 4. Clear draw stats on the renderer
@@ -142,10 +148,13 @@ The **GLViewImpl** is set through preprocessor configuration directives.
 **[Renderer](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L140)**
 *  TODO: add more on renderer
 
+Additionally, the graphics and rendering modules make heavy use of OpenGL. OpenGL methods are all prefixed with 'gl'. For example `glClearColor()`.
 
 * **
 
-##### 1. [Clear the renderer:](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.cpp#L666)
+##### 1. Clear the Renderer
+
+[Clear the renderer:](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.cpp#L666)
 
 ```c++
 void Renderer::clear()
