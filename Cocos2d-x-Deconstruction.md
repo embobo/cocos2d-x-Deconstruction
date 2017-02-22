@@ -1,6 +1,6 @@
-<img src="http://www.cocos2d-x.org/attachments/801/cocos2dx_portrait.png" width=200>
-
 # Cocos2d-x Deconstruction
+
+<img src="http://www.cocos2d-x.org/attachments/801/cocos2dx_portrait.png" width=200>
 
 Emma Bobola & Janna Shaftan
 
@@ -16,17 +16,18 @@ This code deconstruction was written for the purpose of learning how game engine
 
 ## Table of Contents
 
-1. [About the Engine](#engine-about)
+1. [About the Engine](#about-the-engine)
 2. [External Libraries](#external-dependencies)
 3. [Architecture](#architecture)
 4. [Engine Components](#game-engine-components)
 
 > * [Overview](#component-overview)
 > * [Time and the Game Loop](#time-and-game-loop)
-> * [Graphics and Rendering](#graphics-and-rendering)
 > * [Game Objects](#game-objects)
+> * [Physics](#physics)
+> * [Graphics and Rendering](#graphics-and-rendering)
 
-## Engine About
+## About the Engine
 
 * release date
 * company
@@ -43,7 +44,7 @@ This code deconstruction was written for the purpose of learning how game engine
 > * Tizen
 
 
-### External Dependencies
+## External Dependencies
 
 * Physics ~~~ [Box2D](http://box2d.org/) and [Chipmunk](http://chipmunk-physics.net/)
 * Skeleton Animations ~~~ [Spine](http://esotericsoftware.com/) and [Armature](http://www.armaturestudio.com/)
@@ -51,7 +52,7 @@ This code deconstruction was written for the purpose of learning how game engine
 * Graphics ~~~ [OpenGL](https://www.opengl.org/)
 
 
-### Architecture:
+## Architecture
 
 The Cocos2d-x Games Architecture:
 
@@ -64,12 +65,12 @@ The 'Cocos2d C++ Engine' (or 'Cocos2d-x') is the focus of this analysis. We have
 
 (create image)
 
-### Game Engine Components
+## Game Engine Components
 =
 
 Because of the extensive code base, not all components will be covered in this analysis. Provided for reference are all of the names and links to where key components can be found in the git repository.
 
-#### Component Overview:
+### Component Overview
 
 |  |Module|Class or File|Ext. Dependencies|Analyzed|
 | ----|----|----|----|----- |
@@ -80,7 +81,7 @@ Because of the extensive code base, not all components will be covered in this a
 |**Game Objects** | [2d](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/2d) | [Node](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCNode.h#L108) | - | **<font color='green'>yes</font>** |
 |**Animation** | [2d](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/2d) | [Animation](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCAnimation.h#L166) | [Spine](http://esotericsoftware.com/), [Armature](http://www.armaturestudio.com/) | **<font color='red'>no</font>** |
 |**Sprites** | [2d](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/2d) | [Sprite](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCSprite.h#L95) | - | **<font color='red'>no</font>** |
-|**Physics** | [physics](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/physics), [physics3d](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/physics3d) | - | [Box2D](http://box2d.org/), [Chipmunk](http://chipmunk-physics.net/) | **<font color='red'>no</font>** |
+|**Physics** | [physics](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/physics), [physics3d](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/physics3d) | - | [Box2D](http://box2d.org/), [Chipmunk](http://chipmunk-physics.net/) | **<font color='green'>yes</font>** |
 |**Rigid Body Dynamics** | [physics](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/physics) | [PhysicsBody](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/physics/CCPhysicsBody.h#L63) | - | **<font color='red'>no</font>** |
 |**Collision Detection** | [physics](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/physics) | [PhysicsContact](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/physics/CCPhysicsContact.h#L67) | - | **<font color='red'>no</font>** |
 |**Audio** | [audio](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/audio) | [AudioEngine](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/audio/AudioEngine.cpp#L70) | [OpenAL](https://www.openal.org/) based [CocosDenshion library](https://github.com/victorBaro/cocos2d-V2.x-ARC-UIKit/tree/master/cocos2d-2.x-ARC-iOS/libs/CocosDenshion) | **<font color='red'>no</font>** |
@@ -89,7 +90,7 @@ Because of the extensive code base, not all components will be covered in this a
 |**Device Hardware** | [platform](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/platform) | [Device](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCDevice.h#L46), [PlatformConfig.h](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCPlatformConfig.h) | - | **<font color='red'>no</font>** |
 
 
-## Time and Game Loop:
+### Time and Game Loop
 
 The game loop runs from the **Director** class.
 
@@ -121,7 +122,11 @@ void Director::mainLoop()
 
 The director is ultimately responsible for moving from one [scene](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.h) to the next.
 
-## Graphics and Rendering:
+### Game Objects
+
+### Physics
+
+### Graphics and Rendering
 
 Games are appealing because elements of the game react and change. For example the user may control a karate master fighter player on screen. When the player lands a hit the opposing fighter might be updated to have a bloody nose.
 
@@ -216,7 +221,3 @@ void GLViewImpl::swapBuffers()
     [eaglview swapBuffers];
 }
 ```
-
-
-## Game Objects:
-
