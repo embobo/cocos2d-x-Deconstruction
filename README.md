@@ -175,6 +175,17 @@ The [**Scene**](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4
 
 ### Physics
 
+The fundamental **Physics** structure in Cocos involves **PhysicsBody** Nodes, which can be nodes, shapes or constraints which are added to a **PhysicsWorld** container. You can create a **Scene** which is governed by a **PhysicsWorld**, complete with gravity, speed and updateRate properties by the following code: 
+
+```c++
+auto scene = Scene::createWithPhysics();
+```
+PhysicsBody Nodes can be static or dynamic and have position and velocity within the World and forces can be applied to manipulate them in the environment. You can associate any Node with a PhysicsBody triggering the following base Node functionality:
+
+```c++
+Node::setPhysicsBody();
+```
+
 ### Graphics and Rendering
 
 Games are appealing because elements of the game react and change. For example the user may control a karate master fighter player on screen. When the player lands a hit the opposing fighter might be updated to have a bloody nose.
