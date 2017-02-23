@@ -91,7 +91,9 @@ Because of the extensive code base, not all components will be covered in this a
 
 ### Time and Game Loop
 
-The game loop runs from the **Director** class.
+The Cocos2d-x game loop is run through an all-powerful manager object called the **Director** which contains initial setup parameters which initialize the OpenGL object, a **CCScene** to start with and takes care of preloading. Here, the control logic for the application lives and reacts to OS interrupts like shut downs and detects running in the background or foreground.
+
+The director’s **mainLoop()** function is triggered by platform-specific **CCApplication** files, which contain slightly different **Application::run()** loops for each supported platform. Each of these loops merely locate the **Director** instance and activate the **Director**’s main loop upon finishing launching. The right platform extension is included in the **CCApplication** header file where *CC_TARGET_PLATFORM* is checked for Mac, iOS, Android, Tizen, Windows or Linux.
 
 [Game Loop Code](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/base/CCDirector.cpp#L1429):
 
@@ -118,6 +120,7 @@ void Director::mainLoop()
     }
 }
 ```
+**CCDirector** is implemented in *CCDirector.cpp*, in the base directory where core game components live. In Figure II, the initializing function for a Director sheds some light into its responsibilities. 
 
 The director is ultimately responsible for moving from one [scene](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.h) to the next.
 
