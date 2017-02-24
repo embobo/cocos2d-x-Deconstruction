@@ -69,7 +69,9 @@ TODO (create image)
 
 Because of the extensive code base, not all components will be covered in this analysis. The Component Overview provides links to where all key components can be found in the Cocos git repository.
 
+=
 ### Component Overview
+=
 
 |  |Module|Class or File|Ext. Dependencies|Analyzed|
 | ----|----|----|----|----- |
@@ -88,7 +90,9 @@ Because of the extensive code base, not all components will be covered in this a
 |**Platform Resource Management** | [platform](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/platform) | [FileUtils](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCFileUtils.h#L119) | - | **<font color='red'>no</font>** |
 |**Device Hardware** | [platform](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/platform) | [Device](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCDevice.h#L46), [PlatformConfig.h](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCPlatformConfig.h) | - | **<font color='red'>no</font>** |
 
+=
 ### Time and Game Loop
+=
 
 The Cocos2d-x game loop is run through an all-powerful manager object called the **Director** which contains initial setup parameters which initialize the OpenGL object, a **CCScene** to start with and takes care of preloading. Here, the control logic for the application lives and reacts to OS interrupts like shut downs and detects running in the background or foreground.
 
@@ -145,6 +149,7 @@ In Figure III, you can see that the time in Cocos2d is based on real time which 
 
 The director is ultimately responsible for moving from one [scene](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.h) to the next.
 
+=
 ### Game Objects
 =
 
@@ -234,10 +239,11 @@ aSprite->setRotation(40);
 
 >
 ```c++
-mySprite->setScale(2.0);      // note: this multiplier affects both X and Y axes.
+aSprite->setScale(2.0);      // note: this multiplier affects both X and Y axes.
 ```
 >
 
+=
 ### Physics
 =
 
@@ -246,16 +252,18 @@ The fundamental **Physics** structure in Cocos involves **PhysicsBody** Nodes, w
 ```c++
 auto scene = Scene::createWithPhysics();
 ```
+
 PhysicsBody Nodes can be static or dynamic and have position and velocity within the World and forces can be applied to manipulate them in the environment. You can associate any Node with a PhysicsBody triggering the following base Node functionality:
 
 ```c++
 Node::setPhysicsBody();
 ```
 
+=
 ### Graphics and Rendering
 =
 
-Games are appealing because elements of the game react and change. For example the user may control a karate master fighter player on screen. When the player lands a hit the opposing fighter might be updated to have a bloody nose.
+Games are appealing because elements of the game react and change. For example the user may control a karate fighter player on screen. When the player lands a hit the opposing fighter might be updated to have a bloody nose.
 
 > 'User' is a word which will be used to refer to someone who is operating the machine on which a game is running.
 > 
