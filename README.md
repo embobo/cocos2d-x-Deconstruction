@@ -190,6 +190,54 @@ Any **Node** object with `_isVisible` set `true` will be included when the Scene
 
 The [**Sprite**](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/2d/CCSprite.h#L95) class is another inheritor of the **Node** class. Important to this class is it's **Texture** member which contains a 2D image used by the sprite object. This class is also limited to containing only other **Sprite** children.
 
+Sprites are created by the following method call, this code uses a constructor that accepts an image for sprite creation: 
+
+```c++
+// Create sprite from image directly in constructor:
+auto aSprite = Sprite::create("aSprite.png");
+```
+
+Sprite images can also be changed at any point:
+
+```c++
+// Change image on sprite:
+aSprite->setTexture("aDifferentSprite.png");
+```
+
+The `aSprite` object can now be manipulated in many ways. The most commonly used properties and their respective method calls are listed below:
+
+* anchor point
+
+>
+```c++
+mySprite->setAnchorPoint(Vec2(0, 0));
+```
+>
+
+* position (relative to anchor point)
+
+>
+```c++
+aSprite->setPosition(Vec2(200, 0));
+```
+>
+
+* rotation (around the sprite's z axis)
+
+>
+```c++
+aSprite->setRotation(40);
+```
+>
+
+* scale
+
+>
+```c++
+mySprite->setScale(2.0);      // note: this multiplier affects both X and Y axes.
+```
+>
+
 ### Physics
 =
 
