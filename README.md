@@ -21,11 +21,11 @@ This code deconstruction was written for the purpose of learning how game engine
 3. [Architecture of Engine Framework](#framework-architecture)
 4. [Engine Components](#game-engine-components)
 
-> * [Overview](#component-overview)
-> * [Time and the Game Loop](#time-and-game-loop)
-> * [Game Objects and Core Classes](#game-objects)
-> * [Physics](#physics)
-> * [Graphics and Rendering](#graphics-and-rendering)
+    * [Overview](#component-overview)
+    * [Time and the Game Loop](#time-and-game-loop)
+    * [Game Objects and Core Classes](#game-objects)
+    * [Physics](#physics)
+    * [Graphics and Rendering](#graphics-and-rendering)
 
 ## About the Engine
 
@@ -36,12 +36,12 @@ This code deconstruction was written for the purpose of learning how game engine
 * Focus: Cross-platform support
 * Platform compatibilities:
 
-> * MacOS X
-> * Linux
-> * Windows 8
-> * iOS
-> * Android
-> * Tizen
+    * MacOS X
+    * Linux
+    * Windows 8
+    * iOS
+    * Android
+    * Tizen
 
 
 ## External Dependencies
@@ -151,13 +151,7 @@ The director is ultimately responsible for moving from one [scene](https://githu
 
 Game objects in Cocos are instances of the **Node** class or one of its inheritors. Game objects share several basic qualities given in the **Node** class.
 
-> The **Node** base class contains variables for:
-> 
-> * size
-> * position
->
-> and methods for: 
-> 
+> The **Node** base class contains variables dictating size and position, and methods for several key functionalities:
 > * containing other nodes
 > * scheduling callbacks for time dependence
 > * executing actions
