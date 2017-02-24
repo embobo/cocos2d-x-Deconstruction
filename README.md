@@ -263,19 +263,7 @@ Node::setPhysicsBody();
 ### Graphics and Rendering
 =
 
-Games are appealing because elements of the game react and change. For example the user may control a karate fighter player on screen. When the player lands a hit the opposing fighter might be updated to have a bloody nose.
-
-> 'User' is a word which will be used to refer to someone who is operating the machine on which a game is running.
-> 
-> 'Player' is a word which will be used to refer to the in game character controlled by the user. 
-> 
-> ![](images/userVPlayer-AdventureTime.png "")
-
-At each iteration of the game loop, the states of various objects in the game change, such as our fighter character after being punched.  [how is this implemented in the Scene?]
-
-[insert image for this]
-
-After all changes to the scene are made, rendering can be used to translate the codified game objects into parameters the graphics can use to display the scene. Cocos performs these tasks at each iteration of the game loop when `drawScene()` is called.
+At each iteration of the game loop, the states of various objects in the game change. After all changes to a scene and its children are made, rendering can be used to translate the codified game objects into values the graphics can use to display the scene. Cocos does this for the developer by performing these tasks at each iteration of [`mainLoop()`](#time-and-game-loop) when `drawScene()` is called.
 
 1. [Clear the renderer](#clear-the-renderer)
 2. Update current scene
