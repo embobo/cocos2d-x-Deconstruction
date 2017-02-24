@@ -12,7 +12,7 @@ Spring 2017
 
 ## Introduction
 
-This code deconstruction was written for the purpose of learning how game engines are architected. 'Cocos2d-x' and 'Cocos' will be used interchangeably to refer to the game engine. Cocos is an extensive code base with hundreds of thousands of lines of code. Therefore, we will review the capabilities and overall architecture of the engine, followed by in depth analyses of three main components: the game loop and core classes, graphics, and rendering. 
+This code deconstruction was written for the purpose of learning how game engines are architected. 'Cocos2d-x' and 'Cocos' will be used interchangeably to refer to the game engine. Cocos is an extensive code base with hundreds of thousands of lines of code. Therefore, we will review the capabilities and overall architecture of the engine, followed by in depth analyses of five main components: the game loop, game objects, physics, graphics, and rendering. 
 
 ## Table of Contents
 
@@ -162,14 +162,38 @@ Because of the scope of functionality **Node**'s inheritors encompass, this sect
 
 #### Scene Game Object
 
-The [**Scene**](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/2d/CCScene.h#L69) class is nearly identical to the **Node** ancestor with a few important differences. The **Scene** class is used in Cocos to, ideally, parent all other game objects living in the scene, as such it defaults its anchor to the center of the game world. Additionally, it contains a **Camera** object responsible for view perspective, as well as methods for rendering the Scene. 
+The [**Scene**](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/2d/CCScene.h#L69) class is nearly identical to the **Node** ancestor with a few important differences. The **Scene** class is used in Cocos to, ideally, parent all other game objects living in the scene, as such it defaults its anchor to the center of the game world. Additionally, it contains a **Camera** object responsible for view perspective, as well as methods for rendering the Scene.
+
+Objects to be rendered in a scene are attached to the scene object by the following method call:
+
+```c++
+scene.addChild(label_node);
+```
+
+This code adds a child `label_node` to the scene at index 0. This means that other children at a lower index will be rendered _behind_ the `label_node`, and children at a higher index will be rendered _in front of_ the `label_node`. 
+
+For example the following image:
+
+<img src="http://vignette2.wikia.nocookie.net/adventuretimewithfinnandjake/images/3/38/Islands_Miniseries_Opening.jpg/revision/latest?cb=20161210190503" width=500>
+
+May be organized in the scene by the following code:
+
+```c++
+scene.addChild(jakesSail_node, -1);
+scene.addChild(title_node);   // defaults to index 0
+scene.addChild(finn_node, 1);
+```
+
+Any **Node** object with `_isVisible` set `true` will be included when the Scene is rendered. How scenes are rendered will be covered in the [Graphics and Rendering](#graphics-and-rendering) section.
 
 #### Sprite Game Object
+
+The [**Sprite**](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/2d/CCSprite.h#L95) class is another inheritor of the **Node** class. Important to this class is it's **Texture** member which contains a 2D image used by the sprite object. This class is also limited to containing only other **Sprite** children.
 
 ### Physics
 =
 
-The fundamental **Physics** structure in Cocos involves **PhysicsBody** Nodes, which can be nodes, shapes or constraints which are added to a **PhysicsWorld** container. You can create a **Scene** which is governed by a **PhysicsWorld**, complete with gravity, speed and updateRate properties by the following code: 
+The fundamental **Physics** structure in Cocos involves **PhysicsBody** Nodes, which can be nodes, shapes or constraints which are added to a **PhysicsWorld** container. The developer can create a **Scene** which is governed by a **PhysicsWorld**, complete with gravity, speed and updateRate properties by the following code: 
 
 ```c++
 auto scene = Scene::createWithPhysics();
