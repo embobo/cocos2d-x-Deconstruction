@@ -12,7 +12,7 @@ Spring 2017
 
 ## Introduction
 
-This code deconstruction was written for the purpose of learning how game engines are architected. 'Cocos2d-x' and 'Cocos' will be used interchangeably to refer to the game engine. We will review the capabilities and overall architecture of the engine, followed by in depth analyses of several core components of the Cocos game engine.
+This code deconstruction was written for the purpose of learning how game engines are architected. 'Cocos2d-x' and 'Cocos' will be used interchangeably to refer to the game engine. Cocos is an extensive code base with hundreds of thousands of lines of code. Therefore, we will review the capabilities and overall architecture of the engine, followed by in depth analyses of three main components: the game loop and core classes, graphics, and rendering. 
 
 ## Table of Contents
 
@@ -23,18 +23,18 @@ This code deconstruction was written for the purpose of learning how game engine
 
 > * [Overview](#component-overview)
 > * [Time and the Game Loop](#time-and-game-loop)
-> * [Game Objects](#game-objects)
+> * [Game Objects and Core Classes](#game-objects)
 > * [Physics](#physics)
 > * [Graphics and Rendering](#graphics-and-rendering)
 
 ## About the Engine
 
-* release date
-* company
-* history
-* what the engine offers as compared to older versions
+* Release Date: TODO
+* company: Managed by Chukong Technologies Inc.
 * MIT License
-* Cross-Platform:
+* History: The concept of Cocos2d-x was created in Los Cocos, Argentina by a team led by developer Ricardo Quesada [3]. In 2010, it was branched by Zhe Wang and rewritten from Python into C++. After a brief acquisition by online gaming giant Zynga Inc., Cocos is now managed by Chukong Technologies Inc. Since then, versions of the Cocos2D family written in Objective-C, Lua and JavaScript have come to exist and be maintained by an open-source community. This allows game development in many languages which are then transformed to and compiled in native C++. The Cocos2D game engine design is notable for it’s emphasis on cross-platform support. 
+* Focus: Cross-platform support
+* Platform compatibilities:
 
 > * MacOS X
 > * Linux
@@ -63,7 +63,7 @@ The Cocos2d Games Architecture:
 
 The 'Cocos2d C++ Engine' is the focus of this analysis. We have created a diagram of the C++ Engine sub-component's architecture:
 
-(create image)
+TODO (create image)
 
 ## Game Engine Components
 
