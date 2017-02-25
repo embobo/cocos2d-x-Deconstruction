@@ -291,18 +291,47 @@ At each iteration of the game loop, the states of various objects in the game ch
 5. Render in the graphics object
 6. Swap buffers in the graphics object
 
-The core classes used by Cocos to accomplish this are:
+At each iteration of the game loop, the states of various objects in the game change. After all changes to a scene and its children are made, rendering can be used to translate the codified game objects into values the graphics can use to display the scene. Cocos does this for the developer by performing these tasks at each iteration of [`mainLoop()`](#time-and-game-loop) when [`drawScene()`](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/base/CCDirector.cpp#L263) is called. This method in the **Director** class handles object updates before starting rendering with the following method call:
+
+```c++
+_openGLView->renderScene(_runningScene, _renderer);
+```
+
+This calls on Cocos use of OpenGL. In addition to the `_openGLView` object, Cocos calls OpenGL static methods which are all prefixed with 'gl'. For example `glClearColor()`. In total, rendering of the `_runningScene` is handled by two core classes, the **GLView** class, and **Renderer** class. Below is a brief overview of these classes:
 
 **[GLView](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCGLView.h#L100):**
 
-**GLView** is an abstract class that is inherited by the **GLViewImpl** class in each platform with behaviors specific to that platform. For example, the [ios implementation](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/ios/CCGLViewImpl-ios.h#L41) must check for and accommodate the high pixel density of a retina display.
+**GLView** is an abstract class that is inherited by the **GLViewImpl** class in each platform with behaviors specific to that platform. This will be discussed later in the [Platform](#platform) section. An example of platform dependent graphics might be the need to check for and accommodate the high pixel density of a retina display on an ios device.
 
-The **GLViewImpl** is set through preprocessor configuration directives.
+The **GLViewImpl** is set through preprocessor configuration directives. For our purposes we will be referencing the [ios implementation](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/ios/CCGLViewImpl-ios.h#L41).
 
 **[Renderer](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L140)**
-*  TODO: add more on renderer
 
-Additionally, the graphics and rendering modules make heavy use of OpenGL. OpenGL methods are all prefixed with 'gl'. For example `glClearColor()`.
+*  TODO: add more on renderer introduction
+>
+
+As shown previously, OpenGL is called on to render the scene at each game loop iteration. This call is made to the [`void GLView::renderScene(Scene* scene, Renderer* renderer)`](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/CCGLView.cpp#L486) method. This method validates the arguments before calling the scene’s render method:
+
+```c++
+scene->render(renderer, Mat4::IDENTITY, nullptr);
+```
+
+The scene’s render method is shown below:
+
+```c++
+void Scene::render(Renderer* renderer, const Mat4& eyeTransform, const Mat4* eyeProjection)
+{
+    render(renderer, &eyeTransform, eyeProjection, 1);
+}
+```
+
+The `render(...)` method called here is, in fact, another method in scene:
+
+```c++
+void Scene::render(Renderer* renderer, const Mat4* eyeTransforms, const Mat4* eyeProjections, unsigned int multiViewCount)
+```
+
+This method actually starts to do some real work.
 
 * **
 
