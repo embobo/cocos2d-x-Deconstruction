@@ -305,7 +305,7 @@ This calls on Cocos use of OpenGL. In addition to the `_openGLView` object, Coco
 
 The **GLViewImpl** is set through preprocessor configuration directives. For our purposes we will be referencing the [ios implementation](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/ios/CCGLViewImpl-ios.h#L41).
 
-**[Renderer](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L140)**
+**[Renderer](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L140):**
 
 *  TODO: add more on renderer introduction
 >
@@ -325,7 +325,7 @@ void Scene::render(Renderer* renderer, const Mat4& eyeTransform, const Mat4* eye
 }
 ```
 
-The `render(...)` method called here is, in fact, another method in scene:
+The `render(...)` method called here is, in fact, _another_ method in **Scene**:
 
 ```c++
 void Scene::render(Renderer* renderer, const Mat4* eyeTransforms, const Mat4* eyeProjections, unsigned int multiViewCount)
