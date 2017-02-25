@@ -247,7 +247,11 @@ aSprite->setScale(2.0);      // note: this multiplier affects both X and Y axes.
 ### Physics
 =
 
-The fundamental **Physics** structure in Cocos involves **PhysicsBody** Nodes, which can be nodes, shapes or constraints which are added to a **PhysicsWorld** container. The developer can create a **Scene** which is governed by a **PhysicsWorld**, complete with gravity, speed and updateRate properties by the following code: 
+Cocos2d comes integrated with a Physics library called [Chipmunk](http://chipmunk-physics.net/), which provides all of the Physics functionalities needed in complex game environment.
+
+##### Rigid Body Dynamics
+
+The fundamental **Physics** structure in Chipmunk involves **PhysicsBody** Nodes, which can be nodes, shapes or constraints which are added to a **PhysicsWorld** container. The developer can create a **Scene** which is governed by a **PhysicsWorld**, complete with gravity, speed and updateRate properties by the following code: 
 
 ```c++
 auto scene = Scene::createWithPhysics();
@@ -258,6 +262,21 @@ PhysicsBody Nodes can be static or dynamic and have position and velocity within
 ```c++
 Node::setPhysicsBody();
 ```
+Delving into Cocos2D code responsible for **PhysicsBody** creation, you can see that you are allowed some flexibility to create one with a given mass, a mass and a moment or neither. If you create a body, mass and moment can be automatically computed using the density formula mass = density * area. The default density is *PHYSICSBODY_MATERIAL_DEFAULT* and 0.1f. 
+
+All PhysicsBody creation methods call upon an init() method which create a new \_cpBody and add it to the User’s data. Crucial manipulations of a PhysicsBody include:
+* [setGravityEnable()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L336)
+* [setPosition()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L368)
+* [applyTorque()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L450)
+* [applyImpulse()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L442)
+* [applyForce()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L432)
+* [setMass()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L455)
+* [setVelocity()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L576)
+* [setAngularVelocity()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L602)
+* [isResting()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L754)
+* [setCollisionBitmask()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L822)
+
+
 
 =
 ### Graphics and Rendering
