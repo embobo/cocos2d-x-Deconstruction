@@ -380,7 +380,7 @@ void GLViewImpl::swapBuffers()
 }
 ```
 
-Swapping the graphics buffers is how the last set of pixels are replaced with the next set.
+Swapping the graphics buffers is how the last set of pixels are replaced with the next set. This is when the graphics on display are changed and the process starts over in the next game loop.
 
 * **
 
