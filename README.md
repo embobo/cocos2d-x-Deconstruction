@@ -71,7 +71,6 @@ TODO (create image)
 
 Because of the extensive code base, not all components will be covered in this analysis. The Component Overview provides links to where all key components can be found in the Cocos git repository.
 
-=
 ### Component Overview
 =
 
@@ -92,7 +91,7 @@ Because of the extensive code base, not all components will be covered in this a
 |**Platform Resource Management** | [platform](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/platform) | [FileUtils](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCFileUtils.h#L119) | - | **<font color='red'>no</font>** |
 |**Device Hardware** | [platform](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/platform) | [Device](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCDevice.h#L46), [PlatformConfig.h](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCPlatformConfig.h) | - | **<font color='red'>no</font>** |
 
-=
+* **
 ### Time and Game Loop
 =
 
@@ -151,7 +150,8 @@ In Figure III, you can see that the time in Cocos2d is based on real time which 
 
 The director is ultimately responsible for moving from one [scene](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.h) to the next.
 
-=
+* **
+
 ### Game Objects
 =
 
@@ -245,7 +245,8 @@ aSprite->setScale(2.0);      // note: this multiplier affects both X and Y axes.
 ```
 >
 
-=
+* **
+
 ### Physics
 =
 
@@ -278,9 +279,8 @@ All PhysicsBody creation methods call upon an init() method which create a new \
 * [isResting()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L754)
 * [setCollisionBitmask()](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/physics/CCPhysicsBody.cpp#L822)
 
+* **
 
-
-=
 ### Graphics and Rendering
 =
 
@@ -293,13 +293,9 @@ At each iteration of the game loop, the states of various objects in the game ch
 5. Render in the graphics object
 6. Swap buffers in the graphics object
 
-At each iteration of the game loop, the states of various objects in the game change. After all changes to a scene and its children are made, rendering can be used to translate the codified game objects into values the graphics can use to display the scene. Cocos does this for the developer by performing these tasks at each iteration of [`mainLoop()`](#time-and-game-loop) when [`drawScene()`](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/base/CCDirector.cpp#L263) is called. This method in the **Director** class handles object updates before starting rendering with the following method call:
+At each iteration of the game loop, the states of various objects in the game change. After all changes to a scene and its children are made, rendering can be used to translate the codified game objects into values the graphics can use to display the scene. Cocos does this for the developer by performing these tasks at each iteration of [`mainLoop()`](#time-and-game-loop) when [`drawScene()`](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/base/CCDirector.cpp#L263) is called.
 
-```c++
-_openGLView->renderScene(_runningScene, _renderer);
-```
-
-This calls on Cocos use of OpenGL. In addition to the `_openGLView` object, Cocos calls OpenGL static methods which are all prefixed with 'gl'. For example `glClearColor()`. In total, rendering of the `_runningScene` is handled by two core classes, the **GLView** class, and **Renderer** class. Below is a brief overview of these classes:
+Rendering the next scene makes calls to OpenGL. In addition to the `_openGLView` object used by the **Director** class, Cocos calls OpenGL static methods. These methods are prefixed with 'gl'- for example `glClearColor()`. In total, rendering of the `_runningScene` is handled by two core classes, the **GLView** class, and **Renderer** class. Below is a brief overview of these classes:
 
 **[GLView](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCGLView.h#L100):**
 
@@ -378,3 +374,4 @@ Swapping the graphics buffers TODO: does what?
 * **
 
 ## Conclusion
+=
