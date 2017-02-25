@@ -310,28 +310,34 @@ The **GLViewImpl** is set through preprocessor configuration directives. For our
 *  TODO: add more on renderer introduction
 >
 
-As shown previously, OpenGL is called on to render the scene at each game loop iteration. This call is made to the [`void GLView::renderScene(Scene* scene, Renderer* renderer)`](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/CCGLView.cpp#L486) method. This method validates the arguments before calling the scene’s render method:
+As shown previously, OpenGL is called on to render the scene at each game loop iteration. This call is made to the [`void GLView::renderScene(Scene* scene, Renderer* renderer)`](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/CCGLView.cpp#L486) method. The code path for rendering from `drawScene()` is shown in the code below, with unrelated sections of code omitted:
 
 ```c++
-scene->render(renderer, Mat4::IDENTITY, nullptr);
+Director::drawScene() {
+   _openGLView->renderScene(_runningScene, _renderer);
 ```
-
-The scene’s render method is shown below:
-
+>
 ```c++
-void Scene::render(Renderer* renderer, const Mat4& eyeTransform, const Mat4* eyeProjection)
-{
+void GLView::renderScene(Scene* scene, Renderer* renderer) {
+   scene->render(renderer, Mat4::IDENTITY, nullptr);
+```
+>
+> >
+```c++
+void Scene::render(Renderer* renderer, const Mat4& eyeTransform, const Mat4* eyeProjection) {
     render(renderer, &eyeTransform, eyeProjection, 1);
-}
 ```
-
-The `render(...)` method called here is, in fact, _another_ method in **Scene**:
-
+> >
+> > >
 ```c++
-void Scene::render(Renderer* renderer, const Mat4* eyeTransforms, const Mat4* eyeProjections, unsigned int multiViewCount)
+void Scene::render(Renderer* renderer, const Mat4* eyeTransforms, const Mat4* eyeProjections, unsigned int multiViewCount) {
+   auto director = Director::getInstance();
 ```
+> > >
 
-This method actually starts to do some real work.
+Now this seems very confusing but we give the developers some credit and assume that some class somewhere is using the intermediate methods for rendering. Therefore we will ignore the strange circularity of getting the Director instance in the eventual rendering method.
+
+This final `Scene::render(...)` method is where the scene's rendering actually occurs.
 
 * **
 
