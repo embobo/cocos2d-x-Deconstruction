@@ -27,6 +27,8 @@ This code deconstruction was written for the purpose of learning how game engine
     * [Physics](#physics)
     * [Graphics and Rendering](#graphics-and-rendering)
 
+5. [Conclusion](#conclusion)
+
 ## About the Engine
 
 * Release Date: TODO
@@ -310,7 +312,27 @@ The **GLViewImpl** is set through preprocessor configuration directives. For our
 *  TODO: add more on renderer introduction
 >
 
-As shown previously, OpenGL is called on to render the scene at each game loop iteration. This call is made to the [`void GLView::renderScene(Scene* scene, Renderer* renderer)`](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/CCGLView.cpp#L486) method. The code path for rendering from `drawScene()` is shown in the code below, with unrelated sections of code omitted:
+As shown previously, OpenGL is called on to render the scene at each game loop iteration. Before rendering the next scene, the renderer clears the current display:
+
+
+[Clear the renderer:](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.cpp#L666)
+
+```c++
+void Renderer::clear()
+{
+    //Enable Depth mask to make sure glClear clear the depth buffer correctly
+    glDepthMask(true);
+    glClearColor(_clearColor.r, _clearColor.g, _clearColor.b, _clearColor.a);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glDepthMask(false);
+
+    RenderState::StateBlock::_defaultState->setDepthWrite(false);
+}
+```
+
+The previous `_runningScene` having been cleared from the graphics, the next scene is put into the `_runningScene` variable. It's time dependent attributes, such as physics, are then updated before it is finally rendered.
+
+The rendering call is made to the [`void GLView::renderScene(Scene* scene, Renderer* renderer)`](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/CCGLView.cpp#L486) method. The path through code taken to execute rendering from `drawScene()` is shown in the below:
 
 ```c++
 Director::drawScene() {
@@ -335,61 +357,13 @@ void Scene::render(Renderer* renderer, const Mat4* eyeTransforms, const Mat4* ey
 ```
 > > >
 
-Now this seems very confusing but we give the developers some credit and assume that some class somewhere is using the intermediate methods for rendering. Therefore we will ignore the strange circularity of getting the Director instance in the eventual rendering method.
+Now this seems very confusing but we give the developers some credit and assume that some class somewhere is using the intermediate methods for rendering. Therefore we will ignore the strange circularity of getting the Director instance in the eventual rendering method called from the Director.
 
 This final `Scene::render(...)` method is where the scene's rendering actually occurs.
 
-* **
+TODO: render analysis
 
-##### 1. Clear the Renderer
-
-[Clear the renderer:](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.cpp#L666)
-
-```c++
-void Renderer::clear()
-{
-    //Enable Depth mask to make sure glClear clear the depth buffer correctly
-    glDepthMask(true);
-    glClearColor(_clearColor.r, _clearColor.g, _clearColor.b, _clearColor.a);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glDepthMask(false);
-
-    RenderState::StateBlock::_defaultState->setDepthWrite(false);
-}
-```
-
-##### 2. Update current scene:
-
-[Set `_runningScene`](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/base/CCDirector.cpp#L1144) to the scene that needs to be rendered
-
-##### 3. [Update object transforms](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.cpp#L358) (physics and navigation):
-
-##### 4. [Clear the renderer's draw stats](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L194):
-
-```c++
-void clearDrawStats() { _drawnBatches = _drawnVertices = 0; }
-```
-
-##### 5. [Render scene in the graphics object](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCGLView.cpp#L486):
-
-```c++
-void GLView::renderScene(Scene* scene, Renderer* renderer)
-{
-    CCASSERT(scene, "Invalid Scene");
-    CCASSERT(renderer, "Invalid Renderer");
-
-    if (_vrImpl)
-    {
-        _vrImpl->render(scene, renderer);
-    }
-    else
-    {
-        scene->render(renderer, Mat4::IDENTITY, nullptr);
-    }
-}
-```
-
-##### 6. Swap buffers (platform specific) - [ios method](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/platform/ios/CCGLViewImpl-ios.mm#L210):
+Finally, the graphics buffers are swapped:
 
 ```c++
 void GLViewImpl::swapBuffers()
@@ -398,3 +372,9 @@ void GLViewImpl::swapBuffers()
     [eaglview swapBuffers];
 }
 ```
+
+Swapping the graphics buffers TODO: does what?
+
+* **
+
+## Conclusion
