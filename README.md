@@ -286,7 +286,7 @@ All PhysicsBody creation methods call upon an init() method which create a new \
 
 At each iteration of the game loop, the states of various objects in the game change. After all changes to a scene and its children are made, rendering can be used to translate the codified game objects into values the graphics can use to display the scene. Cocos does this for the developer by performing these tasks at each iteration of [`mainLoop()`](#time-and-game-loop) when `drawScene()` is called.
 
-1. [Clear the renderer](#clear-the-renderer)
+1. Clear the renderer
 2. Update current scene
 3. Update time dependent states in scene's objects (physics and navigation)
 4. Clear draw stats on the renderer
@@ -305,13 +305,10 @@ The **GLViewImpl** is set through preprocessor configuration directives. For our
 
 **[Renderer](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.h#L140):**
 
-*  TODO: add more on renderer introduction
+The Renderer performs the work of mapping various game objects rendering needs into a uniform set of instructions for the graphics to display on screen. 
 >
 
-As shown previously, OpenGL is called on to render the scene at each game loop iteration. Before rendering the next scene, the renderer clears the current display:
-
-
-[Clear the renderer:](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.cpp#L666)
+For our rendering analysis we will be following the render path made from the Director's game loop. Before the Director can render the next scene, it must first request that the renderer [clears the current display](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/renderer/CCRenderer.cpp#L666):
 
 ```c++
 void Renderer::clear()
@@ -355,9 +352,89 @@ void Scene::render(Renderer* renderer, const Mat4* eyeTransforms, const Mat4* ey
 
 Now this seems very confusing but we give the developers some credit and assume that some class somewhere is using the intermediate methods for rendering. Therefore we will ignore the strange circularity of getting the Director instance in the eventual rendering method called from the Director.
 
-This final `Scene::render(...)` method is where the scene's rendering actually occurs.
+This final `Scene::render(...)` method is where the scene's [rendering actually occurs](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/2d/CCScene.cpp#L192).
 
-TODO: render analysis
+The key calls made in this function are shown below, with some sections of code omitted with `// ...`:
+
+```c++
+void Scene::render(Renderer* renderer, const Mat4* eyeTransforms, const Mat4* eyeProjections, unsigned int multiViewCount)
+{
+    auto director = Director::getInstance();
+    Camera* defaultCamera = nullptr;
+    const auto& transform = getNodeToParentTransform();
+
+    for (const auto& camera : getCameras())
+    {
+        // ...
+        Camera::_visitingCamera = camera;
+        if (Camera::_visitingCamera->getCameraFlag() == CameraFlag::DEFAULT)
+        {
+            defaultCamera = Camera::_visitingCamera;
+        }
+        
+        for (unsigned int i = 0; i < multiViewCount; ++i) {
+            if (eyeProjections)
+                camera->setAdditionalProjection(eyeProjections[i] * camera->getProjectionMatrix().getInversed());
+            if (eyeTransforms)
+                camera->setAdditionalTransform(eyeTransforms[i].getInversed());
+            director->pushProjectionMatrix(i);
+            director->loadProjectionMatrix(Camera::_visitingCamera->getViewProjectionMatrix(), i);
+        }
+
+        camera->apply();
+        //clear background with max depth
+        camera->clearBackground();
+        //visit the scene
+        visit(renderer, transform, 0);
+#if CC_USE_NAVMESH
+        if (_navMesh && _navMeshDebugCamera == camera)
+        {
+            _navMesh->debugDraw(renderer);
+        }
+#endif
+
+        renderer->render();
+        camera->restore();
+
+        for (unsigned int i = 0; i < multiViewCount; ++i)
+            director->popProjectionMatrix(i);
+
+        // we shouldn't restore the transform matrix since it could be used
+        // from "update" or other parts of the game to calculate culling or something else.
+//        camera->setNodeToParentTransform(eyeCopy);
+    }
+
+#if CC_USE_3D_PHYSICS && CC_ENABLE_BULLET_INTEGRATION
+    if (_physics3DWorld && _physics3DWorld->isDebugDrawEnabled())
+    {
+        Camera *physics3dDebugCamera = _physics3dDebugCamera != nullptr ? _physics3dDebugCamera: defaultCamera;
+        
+        for (unsigned int i = 0; i < multiViewCount; ++i) {
+            if (eyeProjections)
+                physics3dDebugCamera->setAdditionalProjection(eyeProjections[i] * physics3dDebugCamera->getProjectionMatrix().getInversed());
+            if (eyeTransforms)
+                physics3dDebugCamera->setAdditionalTransform(eyeTransforms[i].getInversed());
+            director->pushProjectionMatrix(i);
+            director->loadProjectionMatrix(physics3dDebugCamera->getViewProjectionMatrix(), i);
+        }
+        
+        physics3dDebugCamera->apply();
+        physics3dDebugCamera->clearBackground();
+
+        _physics3DWorld->debugDraw(renderer);
+        renderer->render();
+        
+        physics3dDebugCamera->restore();
+
+        for (unsigned int i = 0; i < multiViewCount; ++i)
+            director->popProjectionMatrix(i);
+    }
+#endif
+
+    Camera::_visitingCamera = nullptr;
+//    experimental::FrameBuffer::applyDefaultFBO();
+}
+```
 
 Finally, the graphics buffers are swapped:
 
@@ -369,7 +446,7 @@ void GLViewImpl::swapBuffers()
 }
 ```
 
-Swapping the graphics buffers TODO: does what?
+Swapping the graphics buffers is how the last set of pixels are replaced with the next set.
 
 * **
 
