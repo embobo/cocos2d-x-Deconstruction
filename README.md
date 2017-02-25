@@ -412,5 +412,4 @@ Swapping the graphics buffers is how the last set of pixels are replaced with th
 * **
 
 ## Conclusion
-=
 Cocos2d-x is an open-source game engine, often used to develop mobile applications, due to it's emphasis on cross-platform support and integration with graphics and physics engines which can be selectively chosen by the programmer by the degree of control and customizability they'd like to have over their creation. 
