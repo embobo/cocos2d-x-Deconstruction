@@ -5,7 +5,7 @@ Rendering the next scene makes calls to OpenGL. In addition to the `_openGLView`
 
 **[GLView](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCGLView.h#L100):**
 
-**GLView** is an abstract class that is inherited by the **GLViewImpl** class in each platform with behaviors specific to that platform. This will be discussed later in the [Platform](#platform) section. An example of platform dependent graphics might be the need to check for and accommodate the high pixel density of a retina display on an ios device.
+**GLView** is an abstract class that is inherited by the **GLViewImpl** class in each platform with behaviors specific to that platform. An example of platform dependent graphics might be the need to check for and accommodate the high pixel density of a retina display on an ios device.
 
 ```c++
 virtual bool isRetinaDisplay() const override { return getContentScaleFactor() == 2.0; }
