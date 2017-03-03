@@ -1,3 +1,6 @@
+| **« [ Time and Game Loop](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/TimeAndGameLoop.md)** | **\~ [Start Page](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/STARTHERE.md) \~** | **[Physics](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/Physics.md) »** |
+| ---- | ---- | ---- |
+
 # Game Objects
 
 Game objects in Cocos are instances of the **Node** class or one of its inheritors. Game objects share several basic qualities given in the **Node** class.
@@ -92,4 +95,4 @@ aSprite->setScale(2.0);      // note: this multiplier affects both X and Y axes.
 ```
 >
 
-## Next: [Physics](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/Physics.md)
+## Next: [Physics](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/Physics.md)    »
