@@ -3,7 +3,7 @@
 
 Cocos2d comes integrated with a Physics library called [Chipmunk](http://chipmunk-physics.net/), which provides all of the Physics functionalities needed in complex game environment.
 
-[![Chipmunk](images/chipmunk.png)](https://www.youtube.com/watch?v=z_Sx9N39KHk)
+[![Chipmunk](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/images/chipmunk.png)](https://www.youtube.com/watch?v=z_Sx9N39KHk)
 
 ## Rigid Body Dynamics
 
