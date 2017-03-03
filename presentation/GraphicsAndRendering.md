@@ -71,7 +71,7 @@ for (auto &renderqueue : _renderGroups)
 visitRenderQueue(_renderGroups[0]);
 ```
 
-`visitRenderQueue(...)` checks for 2D or 3D depth, and processes the game objects that need to be rendered. It does this from back to front. This ordering of objects was mentioned earlier in the [scene game objects](#scene-game-objects) section. Finally, the [render state of the queue is updated](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/renderer/CCRenderer.cpp#L161) where the processed values in the queue are translated to the waiting graphics buffer.
+`visitRenderQueue(...)` checks for 2D or 3D depth, and processes the game objects that need to be rendered. It does this from back to front. This ordering of objects was mentioned earlier in the scene [game objects](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GameObjects.md) section. Finally, the [render state of the queue is updated](https://github.com/cocos2d/cocos2d-x/blob/d07794052fed5c3edc29d4a60f99399d49271515/cocos/renderer/CCRenderer.cpp#L161) where the processed values in the queue are translated to the waiting graphics buffer.
 
 Finally, the graphics buffers are swapped:
 
