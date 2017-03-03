@@ -32,7 +32,7 @@ void Director::mainLoop()
 ```
 **CCDirector** is implemented in *CCDirector.cpp*, in the base directory where core game components live. In Figure II, the initializing function for a Director sheds some light into its responsibilities. 
 
-![](images/init().png "")
+![](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/images/init().png)
 *Figure II: CCDirector init() breakdown*
 
 When the **Director** is created, it creates a new associated **Scheduler**, **Action Manager**, **Event Dispatcher** and **Renderer**.  The main loop function in the **Director** class shown in Figure I, checks if the **Director** needs to be purged or restarted and then invokes a call to **drawScene()**. This is actually the physical taskforce of the Cocos2d game loop since it: 
@@ -51,7 +51,7 @@ A brief description of the role of the created components are as follows:
 
 In Figure III, you can see that the time in Cocos2d is based on real time which is captured by **now**, subtracted from by the **\_lastUpdate** parameter and stored in **\_deltaTime**. At the end of calculating **\_deltaTime**, the **\_lastUpdate** parameter is set to now to continue the cycle.
 
-![](images/drawScene().png "")
+![](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/images/drawScene().png)
 *Figure III: Director::drawScene() breakdown*
 
 The director is ultimately responsible for moving from one [scene](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.h) to the next.
