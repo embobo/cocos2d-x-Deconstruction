@@ -55,3 +55,5 @@ In Figure III, you can see that the time in Cocos2d is based on real time which 
 *Figure III: Director::drawScene() breakdown*
 
 The director is ultimately responsible for moving from one [scene](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.h) to the next.
+
+Next: [Game Objects](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GameObjects.md)
