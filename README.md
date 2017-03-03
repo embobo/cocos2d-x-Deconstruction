@@ -252,6 +252,8 @@ aSprite->setScale(2.0);      // note: this multiplier affects both X and Y axes.
 
 Cocos2d comes integrated with a Physics library called [Chipmunk](http://chipmunk-physics.net/), which provides all of the Physics functionalities needed in complex game environment.
 
+[![Chipmunk](images/chipmunk.png)](https://www.youtube.com/watch?v=z_Sx9N39KHk)
+
 ##### Rigid Body Dynamics
 
 The fundamental **Physics** structure in Chipmunk involves **PhysicsBody** Nodes, which can be nodes, shapes or constraints which are added to a **PhysicsWorld** container. The developer can create a **Scene** which is governed by a **PhysicsWorld**, complete with gravity, speed and updateRate properties by the following code: 
