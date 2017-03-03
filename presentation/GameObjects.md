@@ -36,7 +36,7 @@ scene.addChild(title_node);   // defaults to index 0
 scene.addChild(finn_node, 1);
 ```
 
-Any **Node** object with `_isVisible` set `true` will be included when the Scene is rendered. How scenes are rendered will be covered in the [Graphics and Rendering](#graphics-and-rendering) section.
+Any **Node** object with `_isVisible` set `true` will be included when the Scene is rendered. How scenes are rendered will be covered in the [Graphics and Rendering](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GraphicsAndRendering.md) section.
 
 #### Sprite Game Object
 
