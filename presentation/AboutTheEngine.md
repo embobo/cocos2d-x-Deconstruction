@@ -31,3 +31,6 @@ The Cocos2d Games Architecture:
 
 
 [https://raw.githubusercontent.com/cocos2d/cocos2d-x/v3/docs/framework_architecture.jpg](https://raw.githubusercontent.com/cocos2d/cocos2d-x/v3/docs/framework_architecture.jpg)
+
+
+Next: [Time and Game Loop](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/TimeAndGameLoop.md)
