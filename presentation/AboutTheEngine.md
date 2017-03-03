@@ -1,5 +1,5 @@
 
-## About the Engine
+# About the Engine
 
 * Company: Managed by Chukong Technologies Inc.
 * MIT License
@@ -33,4 +33,4 @@ The Cocos2d Games Architecture:
 [https://raw.githubusercontent.com/cocos2d/cocos2d-x/v3/docs/framework_architecture.jpg](https://raw.githubusercontent.com/cocos2d/cocos2d-x/v3/docs/framework_architecture.jpg)
 
 
-Next: [Component Overview](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/ComponentOverview.md)
+## Next: [Component Overview](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/ComponentOverview.md)
