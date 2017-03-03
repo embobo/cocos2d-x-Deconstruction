@@ -1,5 +1,4 @@
 # Component Overview
-=
 
 |  |Module|Class or File|Ext. Dependencies|Analyzed|
 | ----|----|----|----|----- |
@@ -19,4 +18,4 @@
 |**Device Hardware** | [platform](https://github.com/cocos2d/cocos2d-x/tree/v3/cocos/platform) | [Device](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCDevice.h#L46), [PlatformConfig.h](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/platform/CCPlatformConfig.h) | - | **<font color='red'>no</font>** |
 |**Scripting** | - | - | Supports lua & java | **<font color='red'>no</font>** |
 
-Next: [Time and GameLoop](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/TimeAndGameLoop.md)
+## Next: [Time and GameLoop](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/TimeAndGameLoop.md)
