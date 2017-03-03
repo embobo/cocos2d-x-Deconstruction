@@ -1,3 +1,6 @@
+| **« [Game Objects](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GameObjects.md)** | **\~ [Start Page](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/STARTHERE.md) \~** | **[Graphics and Rendering](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GraphicsAndRendering.md) »** |
+| ---- | ---- | ---- |
+
 # Physics
 
 Cocos2d comes integrated with a Physics library called [Chipmunk](http://chipmunk-physics.net/), which provides all of the Physics functionalities needed in complex game environment.
@@ -64,4 +67,4 @@ There is a **EventListenerPhysicsContact** object which receives all the contact
 ```
 EventListenerPhysics vary slightly depending on whether Bodies, Shapes, or Groups collide. They retrieve the objects using different get methods tailored to account for property differences between the three main types of eventful Nodes. 
 
-## Next: [Graphics and Rendering](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GraphicsAndRendering.md)
+## Next: [Graphics and Rendering](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GraphicsAndRendering.md)    »
