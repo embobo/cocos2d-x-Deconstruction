@@ -8,21 +8,13 @@ Professor: Nik Bear Brown
 
 Spring 2017
 
-## Introduction
-
 <img src="http://www.cocos2d-x.org/attachments/801/cocos2dx_portrait.png" width=200>
 
 ## What We'll Cover:
 
-1. [About the Engine](#about-the-engine)
-2. [External Dependencies/Libraries](#external-dependencies)
-3. [Architecture of Engine Framework](#framework-architecture)
-4. [Engine Components](#game-engine-components)
-
-    * [Overview](#component-overview)
-    * [Time and the Game Loop](#time-and-game-loop)
-    * [Game Objects and Core Classes](#game-objects)
-    * [Physics](#physics)
-    * [Graphics and Rendering](#graphics-and-rendering)
-
-5. [Conclusion](#conclusion)
+1. [About the Engine](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/AboutTheEngine.md)
+2. [Engine Component Overview](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/ComponentOverview.md)
+3. [Time and the Game Loop](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/TimeAndGameLoop.md)
+4. [Game Objects and Core Classes](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GameObjects.md)
+5. [Physics](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/Physics.md)
+6. [Graphics and Rendering](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GraphicsAndRendering.md)
