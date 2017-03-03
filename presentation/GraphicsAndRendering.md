@@ -1,3 +1,6 @@
+| **« [Physics](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/Physics.md)** | **\~ [Start Page](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/STARTHERE.md) \~** | **[Start Page](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/STARTHERE.md) »** |
+| ---- | ---- | ---- |
+
 # Graphics and Rendering
 
 Rendering the next scene makes calls to OpenGL. In addition to the `_openGLView` object used by the **Director** class, Cocos calls OpenGL static methods. These methods are prefixed with 'gl'- for example `glClearColor()`. In total, rendering of the `_runningScene` is handled by two core classes, the **GLView** class, and **Renderer** class. Below is a brief overview of these classes:
@@ -85,4 +88,4 @@ void GLViewImpl::swapBuffers()
 
 Swapping the graphics buffers is how the last set of pixels are replaced with the next set. This is when the graphics on display are changed and the process starts over in the next game loop.
 
-## Next: [Finito](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/STARTHERE.md)
+## Next: [Finito](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/STARTHERE.md)    »
