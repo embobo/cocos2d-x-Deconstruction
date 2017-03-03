@@ -1,7 +1,6 @@
 
 ## About the Engine
 
-* Release Date: TODO
 * Company: Managed by Chukong Technologies Inc.
 * MIT License
 * History: The concept of Cocos2d-x was created in Los Cocos, Argentina by a team led by developer Ricardo Quesada [3]. In 2010, it was branched by Zhe Wang and rewritten from Python into C++. After a brief acquisition by online gaming giant Zynga Inc., Cocos is now managed by Chukong Technologies Inc. Since then, versions of the Cocos2D family written in Objective-C, Lua and JavaScript have come to exist and be maintained by an open-source community. This allows game development in many languages which are then transformed to and compiled in native C++. The Cocos2D game engine design is notable for it’s emphasis on cross-platform support. 
