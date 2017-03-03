@@ -1,3 +1,6 @@
+| **« [ Component Overview](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/ComponentOverview.md)** | **\~ [Start Page](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/STARTHERE.md) \~** | **[Game Objects](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GameObjects.md) »** |
+| ---- | ---- | ---- |
+
 # Time and Game Loop
 
 The Cocos2d-x game loop is run through an all-powerful manager object called the **Director** which contains initial setup parameters which initialize the OpenGL object, a **CCScene** to start with and takes care of preloading. Here, the control logic for the application lives and reacts to OS interrupts like shut downs and detects running in the background or foreground.
@@ -55,4 +58,4 @@ In Figure III, you can see that the time in Cocos2d is based on real time which 
 
 The director is ultimately responsible for moving from one [scene](https://github.com/cocos2d/cocos2d-x/blob/v3/cocos/2d/CCScene.h) to the next.
 
-## Next: [Game Objects](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GameObjects.md)
+## Next: [Game Objects](https://github.com/embobo/cocos2d-x-Deconstruction/blob/master/presentation/GameObjects.md)    »
